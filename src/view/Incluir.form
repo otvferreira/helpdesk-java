@@ -296,14 +296,12 @@
         <Component class="javax.swing.JComboBox" name="comboStatus">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
+              <StringArray count="5">
                 <StringItem index="0" value="Aberto"/>
                 <StringItem index="1" value="Atribuido"/>
                 <StringItem index="2" value="Em An&#xe1;lise"/>
                 <StringItem index="3" value="Pendente de Valida&#xe7;&#xe3;o"/>
                 <StringItem index="4" value="Fechado"/>
-                <StringItem index="5" value=" "/>
-                <StringItem index="6" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -330,11 +328,9 @@
         <Component class="javax.swing.JComboBox" name="comboResponsavel">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Ot&#xe1;vio Ferreira"/>
+                <StringItem index="1" value="Thiago"/>
               </StringArray>
             </Property>
           </Properties>

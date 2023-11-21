@@ -1,21 +1,23 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DAO;
 
-
-import DAO.FabricaConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import model.Ticket;
+import model.Comentario;
 
 /**
  *
- * @author otvfe
+ * @author otavio.ferreira
  */
-public class DAOTicket {
-    private Connection con;
+public class DAOComentario {
+        private Connection con;
     //Pre-compila a query para o banco de dados
     private PreparedStatement comando;
     
@@ -35,23 +37,19 @@ public class DAOTicket {
         }
     }
     
-    public boolean insereTicket(Ticket ticket){
+    public boolean insereComentario(Comentario comentario){
         
         conectar();
-        String sql = "INSERT INTO TICKET(assunto, setor, status, tipo_ocorr, dt_previsao, "
-                + "prioridade, solicitante, responsavel, conteudo) VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO COMENTARIO(status, usuario, "
+                + "ticket, conteudo) VALUES(?,?,?,?)";
         
         try{
             comando = con.prepareStatement(sql);
-            comando.setString(1, ticket.getAssunto());
-            comando.setString(2, ticket.getSetor());
-            comando.setString(3, ticket.getStatus());
-            comando.setString(4, ticket.getTipo_ocorr());
-            comando.setString(5, ticket.getDt_previsao());
-            comando.setString(6, ticket.getPrioridade());
-            comando.setString(7, ticket.getSolicitante());
-            comando.setString(8, ticket.getResponsavel());
-            comando.setString(9, ticket.getConteudo());
+            comando.setString(1, comentario.getStatus());
+            comando.setString(2, comentario.getUsuario());
+            comando.setString(3, comentario.getTicket());
+            comando.setString(4, comentario.getConteudo());
+            
             
             comando.execute();
             return true;
@@ -65,34 +63,30 @@ public class DAOTicket {
     }
     
     
-    public  ArrayList<Ticket> selecionarTodosRegistros()
+    public  ArrayList<Comentario> selecionarTodosRegistros(String ticket)
     {
         conectar();
         //interface utilizada pra guardar dados vindos de um banco de dados
         ResultSet rs;
-        String sql = "SELECT * FROM TICKET";
+        String sql = "SELECT * FROM COMENTARIO WHERE TICKET=?";
         //lista que conterá todas as informações de pessoas no banco de dados
-        ArrayList<Ticket> listaTickets = new ArrayList();
+        ArrayList<Comentario> listaComentarios = new ArrayList();
         try{
             comando = con.prepareStatement(sql);
+            comando.setString(1, ticket);
             rs = comando.executeQuery();
             while(rs.next())
             {
-                Ticket ticket = new Ticket();
-                ticket.setId(rs.getInt("ID"));
-                ticket.setAssunto(rs.getString("ASSUNTO"));
-                ticket.setSetor(rs.getString("SETOR"));
-                ticket.setStatus(rs.getString("STATUS"));
-                ticket.setTipo_ocorr(rs.getString("TIPO_OCORR"));
-                ticket.setDt_previsao(rs.getString("DT_PREVISAO"));
-                ticket.setPrioridade(rs.getString("PRIORIDADE"));
-                ticket.setSolicitante(rs.getString("SOLICITANTE"));
-                ticket.setResponsavel(rs.getString("RESPONSAVEL"));
-                ticket.setConteudo(rs.getString("CONTEUDO"));
-                listaTickets.add(ticket);
+                Comentario comentario = new Comentario();
+                comentario.setId(rs.getInt("ID"));
+                comentario.setStatus(rs.getString("STATUS"));
+                comentario.setUsuario(rs.getString("USUARIO"));
+                comentario.setTicket(rs.getString("TICKET"));
+                comentario.setConteudo(rs.getString("CONTEUDO"));
+                listaComentarios.add(comentario);
             }
             fechar();
-            return listaTickets;
+            return listaComentarios;
         }catch(SQLException e){
              JOptionPane.showMessageDialog(null, "Erro ao buscar registro."+e.getMessage(), 
                     "Erro", JOptionPane.ERROR_MESSAGE, null);
@@ -102,7 +96,7 @@ public class DAOTicket {
             
     }
     
-    public boolean removeTicket(Integer id){
+    public boolean removeComentario(Integer id){
         conectar();
         String sql = "DELETE FROM TICKET WHERE ID=?";
         try{
@@ -119,13 +113,16 @@ public class DAOTicket {
         return false;
     }
     
-    public boolean alteraTicket(Ticket ticket){
+    public boolean alteraComentario(Comentario comentario){
         conectar();
-         String sql = "UPDATE TICKET SET STATUS = ? WHERE ID=?";
+         String sql = "UPDATE TICKET SET STATUS = ?, USUARIO = ?, TICKET = ?, CONTEUDO = ? "
+                 + "WHERE ID=?";
          try{
             comando = con.prepareStatement(sql);
-            comando.setString(1, ticket.getStatus());
-            comando.setInt(2, ticket.getId());
+            comando.setString(1, comentario.getStatus());
+            comando.setString(2, comentario.getUsuario());
+            comando.setString(3, comentario.getTicket());
+            comando.setString(4, comentario.getConteudo());
             comando.executeUpdate();
             return true;
         }catch(SQLException e){
@@ -136,6 +133,4 @@ public class DAOTicket {
         }
          return false;
     }
-    
-    
 }

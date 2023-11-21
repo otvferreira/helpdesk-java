@@ -102,11 +102,11 @@ public class Incluir extends javax.swing.JFrame {
             }
         });
 
-        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aberto", "Atribuido", "Em Análise", "Pendente de Validação", "Fechado", " ", " " }));
+        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aberto", "Atribuido", "Em Análise", "Pendente de Validação", "Fechado" }));
 
         comboPrioridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Muito Baixo", "Baixo", "Normal", "Alto", "Muito Alto" }));
 
-        comboResponsavel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboResponsavel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Otávio Ferreira", "Thiago" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

@@ -30,6 +30,7 @@ public class VisualizaTicket extends javax.swing.JFrame {
         for(Ticket ticket : listaTickets)
         {
             Object[] dados = {
+                ticket.getId(),
                 ticket.getAssunto(), 
                 ticket.getSetor(),
                 ticket.getStatus(),
@@ -71,7 +72,7 @@ public class VisualizaTicket extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -141,6 +142,7 @@ public class VisualizaTicket extends javax.swing.JFrame {
             
             Ticket ticket = new Ticket();
             int linha = tabelaTicket.getSelectedRow();
+            
             ticket.setId(Integer.parseInt(tabelaTicket.getValueAt(linha, 0).toString()));
             ticket.setAssunto(tabelaTicket.getValueAt(linha, 1).toString());
             ticket.setSetor(tabelaTicket.getValueAt(linha, 2).toString());
@@ -153,6 +155,7 @@ public class VisualizaTicket extends javax.swing.JFrame {
             ticket.setConteudo(tabelaTicket.getValueAt(linha, 9).toString());
             
             
+      
             
             new AlterarTicket(ticket).setVisible(true);
             this.dispose();
